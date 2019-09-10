@@ -1,0 +1,45 @@
+﻿<Window x:Class="synchronizationContext.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:synchronizationContext.Converters"
+        xmlns:viewModels="clr-namespace:synchronizationContext.View_Models"
+        mc:Ignorable="d" x:Name="mywin"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <viewModels:PlayGroundViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+        <DataTemplate x:Key="SnakeTemplate">
+            <Ellipse  Height="10" Width="10"  Stroke="Black">
+                <Ellipse.Style>
+                    <Style TargetType="Ellipse">
+                        <Setter Property="Fill" Value="{Binding Path=IsHead, Converter={StaticResource BoolToColorConverter}}"></Setter>
+                    </Style>
+                </Ellipse.Style>
+            </Ellipse>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+
+        </Grid.RowDefinitions>-->
+            <Canvas Name="paintCanvas"  Background="White"
+
+                HorizontalAlignment="Stretch" MaxWidth="400" MaxHeight="300"></Canvas>
+
+        
+
+        <!--<ListView Canvas.Left="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Snake}" ItemTemplate="{StaticResource SnakeTemplate}" BorderBrush="Transparent">
+           </ListView>-->
+    </Grid>
+        
+</Window>
